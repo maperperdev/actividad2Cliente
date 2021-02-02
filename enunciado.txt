@@ -1,0 +1,30 @@
+DWEC: UD 04 - Ejer 2 - Ajax
+Actividad (t120)
+
+Realizar en una carpeta independiente cada uno de los apartados siguientes con el código JavaScript en un fichero
+independiente.
+
+1. Crear un documento con un formulario que permita introducir datos de libros en una base de datos del servidor.
+Los datos serán título, autor, editor, año de publicación y precio. Deberá incluir a su vez otro formulario para
+poder realizar consultas en la base de datos. Se podrá consultar por título o autor, según elija el usuario.
+Los datos se enviarán mediante el método POST. 
+
+2. Crear un script en el servidor con los datos, en formato XML, de una serie de películas. Crear un documento en
+el cliente que solicite dichos datos y los muestre por pantalla. El usuario podrá elegir cuáles de los datos serán
+mostrados y buscar por un campo concreto (estas operaciones se realizarán desde el lado del cliente).
+
+Se adjuntan varios ficheros para la realización del ejercicio.
+
+3. Crear un documento con un formulario que permita introducir datos de vehículos en una base de datos del servidor,
+y posteriormente poder mostrarlos.
+Los datos serán marca, modelo, tipo de combustible (gasolina o diésel), cilindrada y número de puertas. Deberá tener
+las siguientes características:
+
+Para introducir los datos se usará una serie de cuadros de texto, salvo en el caso del combustible, en el que se
+usarán botones de opción.
+Deberá incluir a su vez otro formulario para poder realizar consultas en la base de datos.
+Se podrá consultar por un campo cualquiera de la base; dicho campo se escogerá a través de una lista desplegable.
+Una vez escogido el campo, deberá rellenarse una lista desplegable con los distintos valores existentes para dicho
+campo, y al escoger uno de ellos se mostrarán todos los registros coincidentes con el mismo.
+Los datos se enviarán mediante el método Get.
+Nota: Se deberán crear los scripts correspondientes del servidor.

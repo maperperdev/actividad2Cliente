@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Ejercicio 2</title>
+		<script type="text/javascript" src="app.js"></script>
+		<style>
+			#resultados{
+				background: yellow;
+			}
+		</style>
+	</head>
+	<body>
+		<p>Datos del fichero xml de Películas:</p>
+		<form>
+			<fieldset>
+				<legend>Campos a mostrar</legend>
+			
+				<input type="checkbox" name="datosMostrar" value="titulo" id="titulo">
+				<label for="titulo">Titulo</label>
+				<br>
+				
+				<input type="checkbox" name="datosMostrar" value="director" id="director">
+				<label for="director">Director</label>
+				<br>
+				
+				<input type="checkbox" name="datosMostrar" value="nacionalidad" id="nacionalidad">
+				<label for="nacionalidad">Nacionalidad</label>
+				<br>
+				
+				<input type="checkbox" name="datosMostrar" value="productora" id="productora">
+				<label for="productora">Productora</label>
+				<br>
+				
+				<input type="checkbox" name="datosMostrar" value="fecha" id="fecha">
+				<label for="fecha">Fecha</label>
+				<br>
+			</fieldset>
+			<fieldset>
+				<legend>Campo a buscar</legend>
+				<label for="campo">Campo</label>
+				<select name="campo" id="campo">
+					<option value="titulo">titulo</option>
+					<option value="director">director</option>
+					<option value="nacionalidad">nacionalidad</option>
+					<option value="productora">productora</option>
+					<option value="fecha">fecha</option>
+				</select>
+				<label for="valor">Valor</label>
+				<input type="text" name="valor" id="valor"><br>
+			</fieldset>
+			<br>
+			<input type="button" name="Consultar" id="consultar" value="Consultar">
+			
+		</form>
+		<br>
+		<div id="indicador"></div>
+		<div id="resultados"></div>
+	</body>
+</html>
