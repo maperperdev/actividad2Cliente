@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Ejer Ajax 2 - Apartado 3</title>
+	<script type="text/javascript" src="app.js"></script>
+	<style>
+		#resultados {
+			background: yellow;
+		}
+
+		.ocultar {
+			display: none;
+			visibility: hidden;
+		}
+		select {
+			display: inline-block;
+		}
+		.mostrar {
+			display: block;
+			visibility: visible;
+		}
+	</style>
+</head>
+
+<body>
+	<!--
+3. Crear un documento con un formulario que permita introducir datos de vehículos en una base de datos del servidor, y posteriormente poder mostrarlos.
+Los datos serán marca, modelo, tipo de combustible (gasolina o diésel), cilindrada y número de puertas. Deberá tener las siguientes características:
+
+Para introducir los datos se usará una serie de cuadros de texto, salvo en el caso del combustible, en el que se usarán botones de opción.
+Deberá incluir a su vez otro formulario para poder realizar consultas en la base de datos.
+Se podrá consultar por un campo cualquiera de la base; dicho campo se escogerá a través de una lista desplegable.
+Una vez escogido el campo, deberá rellenarse una lista desplegable con los distintos valores existentes para dicho campo, y al escoger uno de ellos se mostrarán todos los registros coincidentes con el mismo.
+Los datos se enviarán mediante el método Get.
+Nota: Se deberán crear los scripts correspondientes del servidor.
+-->
+	<fieldset>
+		<legend>Introducir nuevo vehículo</legend>
+		<form id="formularioInsercion">
+			<label for="marca">Marca: </label>
+			<input type="text" name="marca" id="marca"><br>
+			<label for="modelo">Modelo: </label>
+			<input type="text" name="modelo" id="modelo"><br>
+
+			<label for="combustible">Tipo de combustible: </label>
+			<select id="combustible">
+				<option value="gasolina">Gasolina</option>
+				<option value="diesel">Diesel</option>
+			</select><br>
+
+			<label for="cilindrada">Cilindrada: </label>
+			<input type="text" name="cilindrada" id="cilindrada"><br>
+
+			<label for="numPuertas">Numero de Puertas: </label>
+			<input type="text" name="numPuertas" id="numPuertas"><br><br>
+
+			<input type="button" name="introducir" id="btnIntroducir" value="Introducir">
+		</form>
+	</fieldset>
+	<br />
+	<fieldset>
+		<legend>Consulta</legend>
+		<form id="formularioConsulta">
+			<label for="lista_campos">Campo a buscar: </label>
+			<select id="lista_campos">
+				<option value="">
+					<-- Selecciona un campo -->
+				</option>
+				<option value="marca">Marca</option>
+				<option value="modelo">Modelo</option>
+				<option value="combustible">Tipo de combustible</option>
+				<option value="cilindrada">Cilindrada</option>
+				<option value="numPuertas">Numero de puertas</option>
+			</select><br>
+
+			<input type="button" name="consultar" id="btnConsultar" value="Consultar">
+		</form>
+	</fieldset>
+	<br><br>
+	<div id="indicador"></div>
+	<div id="resultados"></div>
+</body>
+
+</html>
+
+<table>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+</table>
