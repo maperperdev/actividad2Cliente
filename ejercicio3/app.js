@@ -9,54 +9,80 @@ function start() {
   const btnIntroducir = document.getElementById("btnIntroducir");
   const listaCampos = document.getElementById("lista_campos");
   const btnConsultar = document.getElementById("btnConsultar");
+  btnConsultar.style.visibility = "hidden";
   const resultados = document.getElementById("resultados");
 
-  listaCampos.addEventListener("change", () => {
-    console.log();
-    var url = `seleccionarCampos.php?atributo=${seleccionaConsulta()}`;
-    var httpRequest = new XMLHttpRequest()
-    var datos;
-    httpRequest.open("GET", url, true);
-    httpRequest.onreadystatechange = function () {
-      if (httpRequest.readyState === XMLHttpRequest.DONE && httpRequest.status === 200) {
-        datos = JSON.parse(httpRequest.responseText);
-        if (document.getElementById("listaAtributos") != null) {
-          document.getElementById("listaAtributos").remove();
+  listaCampos.addEventListener(
+    "change",
+    () => {
+      btnConsultar.style.visibility = "visibility";
+      var url = `seleccionarCampos.php?atributo=${seleccionaConsulta()}`;
+      var httpRequest = new XMLHttpRequest();
+      var datos;
+      httpRequest.open("GET", url, true);
+      httpRequest.onreadystatechange = function () {
+        if (
+          httpRequest.readyState === XMLHttpRequest.DONE &&
+          httpRequest.status === 200
+        ) {
+          datos = JSON.parse(httpRequest.responseText);
+          if (document.getElementById("listaAtributos") != null) {
+            document.getElementById("listaAtributos").remove();
+          }
+          cargarValores(datos);
+          btnConsultar.style.visibility = "visible";
         }
-        cargarValores(datos);
-        btnConsultar.style.visibility = "visible";
-      }
-    };
-    httpRequest.send();
-  }, false);
+      };
+      httpRequest.send();
+    },
+    false
+  );
 
-  btnIntroducir.addEventListener("click", () => {
-    var url = `insertar.php?marca=${marca.value}&modelo=${modelo.value}&combustible=${seleccionaCombustible()}&cilindrada=${cilindrada.value}&numPuertas=${numPuertas.value}`;
-    var httpRequest = new XMLHttpRequest()
-    httpRequest.open("GET", url, true);
-    httpRequest.onreadystatechange = function () {
-      if (httpRequest.readyState === XMLHttpRequest.DONE && httpRequest.status === 200) {
-        console.log(httpRequest.responseText);
-      }
-    };
-    httpRequest.send();
-  }, false);
+  btnIntroducir.addEventListener(
+    "click",
+    () => {
+      var url = `insertar.php?marca=${marca.value}&modelo=${
+        modelo.value
+      }&combustible=${seleccionaCombustible()}&cilindrada=${
+        cilindrada.value
+      }&numPuertas=${numPuertas.value}`;
+      var httpRequest = new XMLHttpRequest();
+      httpRequest.open("GET", url, true);
+      httpRequest.onreadystatechange = function () {
+        if (
+          httpRequest.readyState === XMLHttpRequest.DONE &&
+          httpRequest.status === 200
+        ) {
+        }
+      };
+      httpRequest.send();
+    },
+    false
+  );
 
-  btnConsultar.addEventListener("click", () => {
-    btnConsultar.style.visibility = "hidden";
-    console.log(seleccionaConsulta());
-    console.log(seleccionaAtributosParaConsulta());
-    var url = `ejecutaConsulta.php?campo=${seleccionaConsulta()}&atributo=${seleccionaAtributosParaConsulta()}`
-    var httpRequest = new XMLHttpRequest()
-    httpRequest.open("GET", url, true);
-    httpRequest.onreadystatechange = function () {
-      if (httpRequest.readyState === XMLHttpRequest.DONE && httpRequest.status === 200) {
-        datos = JSON.parse(httpRequest.responseText);
-        resultados.appendChild(mostrarConsulta(datos));
-      }
-    };
-    httpRequest.send();
-  }, false);
+  btnConsultar.addEventListener(
+    "click",
+    () => {
+      btnConsultar.style.visibility = "hidden";
+      var url = `ejecutaConsulta.php?campo=${seleccionaConsulta()}&atributo=${seleccionaAtributosParaConsulta()}`;
+      var httpRequest = new XMLHttpRequest();
+      var datos;
+      httpRequest.open("GET", url, true);
+
+      httpRequest.onreadystatechange = function () {
+        if (
+          httpRequest.readyState === XMLHttpRequest.DONE &&
+          httpRequest.status === 200
+        ) {
+          datos = JSON.parse(httpRequest.responseText);
+          resultados.appendChild(mostrarConsulta(datos));
+          btnConsultar.style.visibility = "visible";
+        }
+      };
+      httpRequest.send();
+    },
+    false
+  );
 
   function seleccionaCombustible() {
     for (let i = 0; i < combustible.length; i++) {
@@ -67,14 +93,12 @@ function start() {
   }
 
   function seleccionaAtributosParaConsulta() {
-    const listaAtributos = document.getElementById("listaAtributos");
-    console.log(listaAtributos);
-    for (let i = 1; i < listaAtributos.length; i++) {
+    var listaAtributos = document.getElementById("listaAtributos");
+    for (let i = 0; i < listaAtributos.length; i++) {
       if (listaAtributos[i].selected) {
         return listaAtributos[i].value;
       }
     }
-
   }
 
   function seleccionaConsulta() {
@@ -90,7 +114,6 @@ function start() {
     select.setAttribute("id", "listaAtributos");
     select.style.display = "inline";
     const consulta = seleccionaConsulta();
-    console.log(consulta);
     for (let i = 0; i < datos.length; i++) {
       var opt = document.createElement("option");
       opt.setAttribute("value", datos[i][consulta]);
@@ -100,8 +123,10 @@ function start() {
     listaCampos.insertAdjacentElement("afterend", select);
   }
 
-
   function mostrarConsulta(datos) {
+    if (document.getElementById("tablaGenerada") != null) {
+      document.getElementById("tablaGenerada").remove();
+    }
     var tabla = `<table>
     <tr>
       <th>Id</th>
@@ -111,16 +136,23 @@ function start() {
       <th>Cilindrada</th>
       <th>Número de puertas</th>
     </tr>`;
-    for (let i = 0; datos.length; i++) {
-      tabla += `	<tr>
-      <td>${datos[i].id}</td>
-      <td>${datos[i].marca}</td>
-      <td>${datos[i].modelo}</td>
-      <td>${datos[i].combustible}</td>
-      <td>${datos[i].cilindrada}</td>
-      <td>${datos[i].numPuertas}</td>
-    </tr>`
+    for (let i = 0; i < datos.length; i++) {
+      if (typeof datos[i] == "object") {
+        tabla += `<tr>
+        <td>${datos[i]["id"]}</td>
+        <td>${datos[i]["marca"]}</td>
+        <td>${datos[i]["modelo"]}</td>
+        <td>${datos[i]["combustible"]}</td>
+        <td>${datos[i]["cilindrada"]}</td>
+        <td>${datos[i]["numPuertas"]}</td>
+       </tr>`;
+      }
     }
     tabla += "</table>";
+    var nodeTable = document.createElement("table");
+    nodeTable.setAttribute("id", "tablaGenerada");
+    nodeTable.innerHTML = tabla;
+    console.log(nodeTable);
+    return nodeTable;
   }
 }

@@ -1,6 +1,6 @@
 <?php
 $campo = $_GET["campo"];
-$atributo= $_GET["atributo"];
+$atributo = $_GET["atributo"];
 
 $servidor = "localhost";
 $basedatos = "ajax";
@@ -15,7 +15,7 @@ if ($conexion->connect_error) {
   die("Error en la conexion: " + $conexion->connect_error);
 } else {
 
-  $sql = "select * from vehiculo where $campo = $atributo";
+  $sql = "select * from vehiculos where $campo = '$atributo'";
   if ($resultado = $conexion->query($sql)) {
     $datos = array();
 
